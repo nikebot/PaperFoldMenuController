@@ -308,8 +308,21 @@
     }
 }
 
+//Just all this action to open or close paperFold
+- (void) toggleMenu {
+    NSInteger position = self.paperFoldView.contentView.frame.origin.x;
+    if(position == 0){
+         [self showMenu:YES animated:YES];
+    } else if( position >= self.menuWidth ){
+         [self showMenu:NO animated:YES];
+    }
+}
+
 - (void)showMenu:(BOOL)show animated:(BOOL)animated
 {
+    //Force to hide keyboard
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+
     if (show)
     {
         [self.paperFoldView setPaperFoldState:PaperFoldStateLeftUnfolded animated:animated];
